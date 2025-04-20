@@ -6,18 +6,19 @@
 #include <unordered_set>
 #include <vector>
 
+
 class Vertex {
 public:
     std::string label;
 
-    static int s_instCount;
+    int id = 0;
 
     Vertex(const std::string& vertexLabel) {
         label = vertexLabel;
     }
 };
 
-int s_instCount = 0;
+//int s_instCount = 0;
 
 class Edge {
 public:
@@ -41,6 +42,8 @@ private:
     std::unordered_map<Vertex*, std::vector<Edge*>*> toEdges;
 
 public:
+    std::vector<std::vector<int>> adjacentMatrix;
+
     virtual ~Graph() {
         // Get the set of vertices and the set of edges
         std::unordered_set<Vertex*> distinctVertices;
@@ -71,6 +74,7 @@ public:
         }
     }
 
+    /*
     Vertex* AddVertex(const std::string& newVertexLabel) {
         // Create the new Vertex object
         Vertex* newVertex = new Vertex(newVertexLabel);
@@ -81,6 +85,7 @@ public:
 
         return newVertex;
     }
+    */
 
     Edge* AddDirectedEdge(Vertex* fromVertex, Vertex* toVertex, double weight = 1.0) {
         // Don't add the same edge twice
@@ -119,6 +124,8 @@ public:
 
     // Returns a vector of edges with the specified fromVertex
     const std::vector<Edge*>* GetEdgesFrom(Vertex* fromVertex) const {
+        int id = fromVertex->id;
+
         return fromEdges.at(fromVertex);
     }
 

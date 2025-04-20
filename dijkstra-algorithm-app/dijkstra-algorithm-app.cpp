@@ -69,6 +69,8 @@ string GetShortestPath(Vertex* startVertex, Vertex* endVertex,
     path = startVertex->label + path;
     return path;
 }
+
+//matrix code 
 void addEdge(vector<vector<int>>& mat, int i, int j)
 {
     mat[i][j] = 1;
@@ -102,6 +104,13 @@ int main()
 
     cout << "Adjacency Matrix Representation" << endl;
     displayMatrix(mat);
+    Vertex v = Vertex("A");
+    v.id = 1;
+    cout << v.label << "id = " << v.id << endl;
+
+    Graph g = Graph();
+    g.adjacentMatrix = mat;
+    displayMatrix(g.adjacentMatrix);
 
     return 0;
 }
