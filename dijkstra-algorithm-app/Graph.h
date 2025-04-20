@@ -8,15 +8,16 @@
 
 class Vertex {
 public:
-    int label;
+    std::string label;
+
     static int s_instCount;
 
-    Vertex(int vertexLabel) {
+    Vertex(const std::string& vertexLabel) {
         label = vertexLabel;
     }
 };
 
-int Vertex::s_instCount = 0;
+int s_instCount = 0;
 
 class Edge {
 public:
