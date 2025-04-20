@@ -70,6 +70,42 @@ string GetShortestPath(Vertex* startVertex, Vertex* endVertex,
     return path;
 }
 
+void displayMatrix(Graph& graph) {
+    const auto& vertices = graph.GetVertices();
+    size_t size = vertices.size();
+
+    // Create a mapping of vertices to indices
+    unordered_map<Vertex*, int> vertexIndexMap;
+    for (size_t i = 0; i < size; ++i) {
+        vertexIndexMap[vertices[i]] = i;
+    }
+
+    // Initialize the adjacency matrix
+    vector<vector<double>> matrix(size, vector<double>(size, numeric_limits<double>::infinity()));
+
+    // Fill the adjacency matrix with edge weights
+    for (Edge* edge : graph.GetEdges()) {
+        int fromIndex = vertexIndexMap[edge->fromVertex];
+        int toIndex = vertexIndexMap[edge->toVertex];
+        matrix[fromIndex][toIndex] = edge->weight;
+    }
+
+    // Print the adjacency matrix
+    cout << "Adjacency Matrix:" << endl;
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t j = 0; j < size; ++j) {
+            if (matrix[i][j] == numeric_limits<double>::infinity()) {
+                cout << "INF ";
+            }
+            else {
+                cout << matrix[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+
 int main() {
     Graph g;
 
@@ -77,40 +113,12 @@ int main() {
     Vertex* vertexB = g.AddVertex("B");
     Vertex* vertexC = g.AddVertex("C");
     Vertex* vertexD = g.AddVertex("D");
-    Vertex* vertexE = g.AddVertex("E");
-    Vertex* vertexF = g.AddVertex("F");
-    Vertex* vertexG = g.AddVertex("G");
-    Vertex* vertices[] = { vertexA, vertexB, vertexC, vertexD, vertexE, vertexF, vertexG };
+    Vertex* vertices[] = { vertexA, vertexB, vertexC, vertexD };
 
     g.AddUndirectedEdge(vertexA, vertexB, 8);
     g.AddUndirectedEdge(vertexA, vertexD, 3);
     g.AddUndirectedEdge(vertexA, vertexC, 7);
-    g.AddUndirectedEdge(vertexB, vertexE, 6);
-    g.AddUndirectedEdge(vertexC, vertexD, 1);
-    g.AddUndirectedEdge(vertexC, vertexE, 2);
-    g.AddUndirectedEdge(vertexD, vertexF, 15);
-    g.AddUndirectedEdge(vertexD, vertexG, 12);
-    g.AddUndirectedEdge(vertexE, vertexF, 4);
-    g.AddUndirectedEdge(vertexF, vertexG, 1);
+    g.AddUndirectedEdge(vertexC, vertexD, 1);;
 
-    // Run Dijkstra's algorithm first.
-    unordered_map<Vertex*, PathVertexInfo*> infoMap = DijkstraShortestPath(g, vertexA);
-
-    // Display shortest path for each vertex from vertexA.    
-    for (Vertex* vertex : vertices) {
-        PathVertexInfo* info = infoMap[vertex];
-        if (info->predecessor == nullptr && vertex != vertexA) {
-            cout << "A to " << vertex->label << ": no path exists" << endl;
-        }
-        else {
-            cout << "A to " << vertex->label << ": ";
-            cout << GetShortestPath(vertexA, vertex, infoMap);
-            cout << " (total weight: " << (int)info->distance << ")" << endl;
-        }
-    }
-
-    // Delete each allocated PathVertexInfo
-    for (auto& keyValuePair : infoMap) {
-        delete keyValuePair.second;
-    }
+    displayMatrix(g);
 }
