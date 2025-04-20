@@ -69,56 +69,39 @@ string GetShortestPath(Vertex* startVertex, Vertex* endVertex,
     path = startVertex->label + path;
     return path;
 }
+void addEdge(vector<vector<int>>& mat, int i, int j)
+{
+    mat[i][j] = 1;
+    mat[j][i] = 1; // Since the graph is undirected
+}
 
-void displayMatrix(Graph& graph) {
-    const auto& vertices = graph.GetVertices();
-    size_t size = vertices.size();
-
-    // Create a mapping of vertices to indices
-    unordered_map<Vertex*, int> vertexIndexMap;
-    for (size_t i = 0; i < size; ++i) {
-        vertexIndexMap[vertices[i]] = i;
-    }
-
-    // Initialize the adjacency matrix
-    vector<vector<double>> matrix(size, vector<double>(size, numeric_limits<double>::infinity()));
-
-    // Fill the adjacency matrix with edge weights
-    for (Edge* edge : graph.GetEdges()) {
-        int fromIndex = vertexIndexMap[edge->fromVertex];
-        int toIndex = vertexIndexMap[edge->toVertex];
-        matrix[fromIndex][toIndex] = edge->weight;
-    }
-
-    // Print the adjacency matrix
-    cout << "Adjacency Matrix:" << endl;
-    for (size_t i = 0; i < size; ++i) {
-        for (size_t j = 0; j < size; ++j) {
-            if (matrix[i][j] == numeric_limits<double>::infinity()) {
-                cout << "INF ";
-            }
-            else {
-                cout << matrix[i][j] << " ";
-            }
-        }
+void displayMatrix(vector<vector<int>>& mat)
+{
+    int V = mat.size();
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+            cout << mat[i][j] << " ";
         cout << endl;
     }
 }
 
+int main()
+{
 
-int main() {
-    Graph g;
+    // Create a graph with 4 vertices and no edges
+    // Note that all values are initialized as 0
+    int V = 4;
+    vector<vector<int>> mat(V, vector<int>(V, 0));
 
-    Vertex* vertexA = g.AddVertex("A");
-    Vertex* vertexB = g.AddVertex("B");
-    Vertex* vertexC = g.AddVertex("C");
-    Vertex* vertexD = g.AddVertex("D");
-    Vertex* vertices[] = { vertexA, vertexB, vertexC, vertexD };
+    // Now add edges one by one
+    addEdge(mat, 0, 1);
+    addEdge(mat, 0, 2);
+    addEdge(mat, 1, 2);
+    addEdge(mat, 2, 3);
 
-    g.AddUndirectedEdge(vertexA, vertexB, 8);
-    g.AddUndirectedEdge(vertexA, vertexD, 3);
-    g.AddUndirectedEdge(vertexA, vertexC, 7);
-    g.AddUndirectedEdge(vertexC, vertexD, 1);;
+    cout << "Adjacency Matrix Representation" << endl;
+    displayMatrix(mat);
 
-    displayMatrix(g);
+    return 0;
 }
