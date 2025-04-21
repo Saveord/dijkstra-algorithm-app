@@ -13,12 +13,24 @@ Description: This application uses Dijkstra's algorithm to find the shortest pat
 #include <iostream>
 #include "Graph.h"
 #include "PathVertexInfo.h"
-#include <algorithm>
-#include <unordered_map>
 #include <vector>
 using namespace std;
 
 int main()
 {
-	Graph g = Graph(4);
+	Graph g = Graph(5);
+	g.addWeightedEdge(0, 1, 5);
+	g.addWeightedEdge(0, 2, 44);
+	g.addWeightedEdge(0, 3, 2);
+	g.addWeightedEdge(0, 4, 1);
+	g.addWeightedEdge(1, 2, 26);
+	g.addWeightedEdge(1, 3, 14);
+	g.addWeightedEdge(1, 4, 7);
+	g.addWeightedEdge(2, 3, 9);
+	g.addWeightedEdge(2, 4, 3);
+	g.addWeightedEdge(3, 4, 68);
+
+	g.printAdjacencyMatrix();
+	cout << endl;
+	DijkstraShortestPath(g.adjacencyMatrix, 0);
 }

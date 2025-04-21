@@ -18,10 +18,18 @@ public:
 		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, 0));
 	}
 
-	void addEdge(int u, int v)
+	void addWeightedEdge(int u, int v, int weight)
 	{
-		adjacencyMatrix[u][v] = 1;
-		adjacencyMatrix[v][u] = 1;
+		if (u == v)
+		{
+			adjacencyMatrix[u][v] = 0;
+			adjacencyMatrix[v][u] = 0;
+		}
+		else
+		{
+			adjacencyMatrix[u][v] = weight;
+			adjacencyMatrix[v][u] = weight;
+		}
 	}
 
 	void printAdjacencyMatrix()
