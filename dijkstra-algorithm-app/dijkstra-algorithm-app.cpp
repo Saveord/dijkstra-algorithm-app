@@ -13,7 +13,6 @@ Description: This application uses Dijkstra's algorithm to find the shortest pat
 #include <iostream>
 #include "Graph.h"
 #include "PathVertexInfo.h"
-#include <vector>
 using namespace std;
 
 int main()
