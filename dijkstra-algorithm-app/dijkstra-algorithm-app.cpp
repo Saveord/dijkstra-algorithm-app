@@ -1,9 +1,8 @@
 /*
 Alexa Wu
 
-Lab: Priority Queue
-
-4/5/2025
+Lab: Graphs --- Dijkstra's Algorithm
+4/20/2025
 
 Windows 11 Home, 24H2, ISO C++14 Standard
 
