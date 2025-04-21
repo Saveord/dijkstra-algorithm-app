@@ -35,8 +35,17 @@ inline void DijkstraShortestPath(vector<vector<int>>& graph, int src) {
 	}
 	// Print the shortest distances
 	cout << "Vertex\tShortest Distance From Vertex " << src << endl;
-	for (int i = 0; i < vertices; i++) {
-		cout << i << "\t" << dist[i] << endl;
+	for (int i = 0; i < vertices; i++) 
+	{
+		if (dist[i] < 0)
+		{ 
+			cout << i << "\t" << "INF" << endl;
+
+		}
+		else
+		{
+			cout << i << "\t" << dist[i] << endl;
+		}
 	}
 }
 #endif

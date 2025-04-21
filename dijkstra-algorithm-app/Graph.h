@@ -15,7 +15,7 @@ public:
 
 	Graph(int n)
 	{
-		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, -1));
+		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, INT_MAX));
 		for (int u = 0; u < adjacencyMatrix.size(); u++)
 		{
 			for (int v = 0; v < adjacencyMatrix.size(); v++)
@@ -44,13 +44,20 @@ public:
 
 	void printAdjacencyMatrix()
 	{
-		cout << "Adjacency Matrix for the Graph(-1 = no path): " << endl;
+		cout << "Adjacency Matrix for the Graph: " << endl;
 		int n = adjacencyMatrix.size();
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
 			{
-				cout << adjacencyMatrix[i][j] << " ";
+				if (adjacencyMatrix[i][j] == INT_MAX)
+				{
+					cout << "INF" << " ";
+				}
+				else
+				{
+					cout << adjacencyMatrix[i][j] << " ";
+				}
 			}
 			cout << endl;
 		}
