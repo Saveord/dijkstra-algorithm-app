@@ -15,15 +15,25 @@ public:
 
 	Graph(int n)
 	{
-		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, 0));
+		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, -1));
+		for (int u = 0; u < adjacencyMatrix.size(); u++)
+		{
+			for (int v = 0; v < adjacencyMatrix.size(); v++)
+			{
+				if (u == v)
+				{
+					adjacencyMatrix[u][v] = 0;
+					adjacencyMatrix[v][u] = 0;
+				}
+			}
+		}
 	}
 
 	void addWeightedEdge(int u, int v, int weight)
 	{
 		if (u == v)
 		{
-			adjacencyMatrix[u][v] = 0;
-			adjacencyMatrix[v][u] = 0;
+			cout << "Cannot add edge to itself" << endl;
 		}
 		else
 		{
@@ -34,7 +44,7 @@ public:
 
 	void printAdjacencyMatrix()
 	{
-		cout << "Adjacency Matrix for the Graph: " << endl;
+		cout << "Adjacency Matrix for the Graph(-1 = no path): " << endl;
 		int n = adjacencyMatrix.size();
 		for (int i = 0; i < n; i++)
 		{
