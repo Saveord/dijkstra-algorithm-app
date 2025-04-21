@@ -20,11 +20,9 @@ int main()
 	g.addWeightedEdge(0, 1, 5);
 	g.addWeightedEdge(0, 2, 44);
 	g.addWeightedEdge(0, 3, 2);
-	g.addWeightedEdge(0, 4, 1);
 	g.addWeightedEdge(1, 2, 26);
 	g.addWeightedEdge(1, 3, 14);
 	g.addWeightedEdge(1, 4, 7);
-	g.addWeightedEdge(2, 3, 9);
 	g.addWeightedEdge(2, 4, 3);
 	g.addWeightedEdge(3, 4, 68);
 
