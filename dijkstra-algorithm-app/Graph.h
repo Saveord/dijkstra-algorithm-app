@@ -1,8 +1,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 #include <string>
-#include <unordered_map>
-#include <unordered_set>
 #include <vector>
 using namespace std;
 
@@ -15,18 +13,7 @@ public:
 
 	Graph(int n)
 	{
-		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, -1));
-		for (int u = 0; u < adjacencyMatrix.size(); u++)
-		{
-			for (int v = 0; v < adjacencyMatrix.size(); v++)
-			{
-				if (u == v)
-				{
-					adjacencyMatrix[u][v] = 0;
-					adjacencyMatrix[v][u] = 0;
-				}
-			}
-		}
+		adjacencyMatrix = vector<vector<int>> (n, vector<int>(n, 0));
 	}
 
 	void addWeightedEdge(int u, int v, int weight)
@@ -44,7 +31,7 @@ public:
 
 	void printAdjacencyMatrix()
 	{
-		cout << "Adjacency Matrix for the Graph(-1 = no path): " << endl;
+		cout << "Adjacency Matrix for the Graph: " << endl;
 		int n = adjacencyMatrix.size();
 		for (int i = 0; i < n; i++)
 		{
